@@ -14,6 +14,7 @@ public class Calculadora extends AppCompatActivity {
     public double num2;
     public double resultado;
     int operacion;
+    public boolean rad;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,11 +27,11 @@ public class Calculadora extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-                    //Rad
+                    rad = true;
                     Toast.makeText(getApplicationContext(), "Radianes", Toast.LENGTH_LONG).show();
                 }
                 else{
-                    // Grados
+                    rad = false;
                     Toast.makeText(getApplicationContext(), "Grado  s", Toast.LENGTH_LONG).show();
 
                 }
@@ -107,17 +108,22 @@ public class Calculadora extends AppCompatActivity {
     public void Pi (View v) {
         String cap = pantalla.getText().toString();
         cap = cap + "π";
-        pantalla.setText(cap);
+        pantalla.setText("π");
     }
 
     // Método suma (operación 1)
     public void Suma (View v){
         try{
             String aux1 = pantalla.getText().toString();
-            num1=Double.parseDouble(aux1);
+            if(aux1.matches("π")){
+                num1=Math.PI;
+            }
+            else {
+                num1 = Double.parseDouble(aux1);
+            }
         }
         catch (NumberFormatException nfe) {}
-        pantalla.setText(""); // Limpiamos la pantalla para introducir el otro número
+        pantalla.setText(""+num1); // Limpiamos la pantalla para introducir el otro número
         operacion = 1;
     }
 
@@ -125,7 +131,12 @@ public class Calculadora extends AppCompatActivity {
     public void Resta (View v){
         try{
             String aux1 = pantalla.getText().toString();
-            num1=Double.parseDouble(aux1);
+            if(aux1.matches("π")){
+                num1=Math.PI;
+            }
+            else {
+                num1 = Double.parseDouble(aux1);
+            }
         }
         catch (NumberFormatException nfe) {}
         pantalla.setText("");
@@ -136,7 +147,12 @@ public class Calculadora extends AppCompatActivity {
     public void Multiplicacion (View v){
         try{
             String aux1 = pantalla.getText().toString();
-            num1=Double.parseDouble(aux1);
+            if(aux1.matches("π")){
+                num1=Math.PI;
+            }
+            else {
+                num1 = Double.parseDouble(aux1);
+            }
         }
         catch (NumberFormatException nfe) {}
         pantalla.setText("");
@@ -147,7 +163,12 @@ public class Calculadora extends AppCompatActivity {
     public void Division (View v){
         try{
             String aux1 = pantalla.getText().toString();
-            num1=Double.parseDouble(aux1);
+            if(aux1.matches("π")){
+                num1=Math.PI;
+            }
+            else {
+                num1 = Double.parseDouble(aux1);
+            }
         }
         catch (NumberFormatException nfe) {}
         pantalla.setText("");
@@ -158,7 +179,12 @@ public class Calculadora extends AppCompatActivity {
     public void Seno (View v){
         try{
             String aux1 = pantalla.getText().toString();
-            num1=Double.parseDouble(aux1);
+            if(aux1.matches("π")){
+                num1=Math.PI;
+            }
+            else {
+                num1 = Double.parseDouble(aux1);
+            }
         }
         catch (NumberFormatException nfe) {}
         pantalla.setText("Sin(");
@@ -169,7 +195,12 @@ public class Calculadora extends AppCompatActivity {
     public void Coseno (View v){
         try{
             String aux1 = pantalla.getText().toString();
-            num1=Double.parseDouble(aux1);
+            if(aux1.matches("π")){
+                num1=Math.PI;
+            }
+            else {
+                num1 = Double.parseDouble(aux1);
+            }
         }
         catch (NumberFormatException nfe) {}
         pantalla.setText("Cos(");
@@ -180,7 +211,12 @@ public class Calculadora extends AppCompatActivity {
     public void Tangente (View v){
         try{
             String aux1 = pantalla.getText().toString();
-            num1=Double.parseDouble(aux1);
+            if(aux1.matches("π")){
+                num1=Math.PI;
+            }
+            else {
+                num1 = Double.parseDouble(aux1);
+            }
         }
         catch (NumberFormatException nfe) {}
         pantalla.setText("Tan(");
@@ -191,7 +227,12 @@ public class Calculadora extends AppCompatActivity {
     public void Igual (View v){
         try{ // Obviar el num2 algunas veces solo usamos uno
             String aux2 = pantalla.getText().toString();
-            num2=Double.parseDouble(aux2);
+            if(aux2.matches("π")){
+                num2=Math.PI;
+            }
+            else {
+                num2 = Double.parseDouble(aux2);
+            }
         }
         catch (NumberFormatException nfe) {}
         pantalla.setText(""); // Limpiamos la pantalla
@@ -215,16 +256,33 @@ public class Calculadora extends AppCompatActivity {
             }
         }
         else if (operacion == 5){
-            double rad=Math.toRadians(num1);
-            resultado=(Math.sin(rad));
+            if(rad == false) {
+                double rad = Math.toRadians(num1);
+                resultado = (Math.sin(rad));
+            }
+            else{
+                resultado = (Math.sin(num1));
+            }
         }
+
         else if (operacion == 6){
-            double rad=Math.toRadians(num1);
-            resultado=(Math.cos(rad));
+            if(rad == false) {
+                double rad = Math.toRadians(num1);
+                resultado = (Math.cos(rad));
+            }
+            else {
+                resultado = (Math.cos(num1));
+            }
+
         }
         else if (operacion == 7){
-            double rad=Math.toRadians(num1);
-            resultado=(Math.tan(rad));
+            if(rad == false){
+                double rad=Math.toRadians(num1);
+                resultado=(Math.tan(rad));
+            }
+            else {
+                resultado=(Math.tan(num1));
+            }
         }
         pantalla.setText(""+resultado);
         num1=resultado;
